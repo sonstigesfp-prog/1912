@@ -150,3 +150,55 @@ window.playSSP = function(spielerWahl) {
         statusEl.innerHTML = `Verloren!<br>Die Eule hatte <b>${wahlNamen[euleWahl]}</b>.<br>Versuch es noch einmal! 😉`;
     }
 };
+// ==========================================
+// CODE FÜR DAS SAMSTAGS-SPIEL
+// ==========================================
+const emojiArea = document.getElementById('emoji-game-area');
+if (emojiArea) {
+    const emojis = ["🦉", "🌸", "⭐", "☕"];
+    let sequenz = [];
+    let eingabe = [];
+    const statusEl = document.getElementById('emoji-game-status');
+    const startBtn = document.getElementById('start-emoji-btn');
+
+    if (startBtn) {
+        startBtn.onclick = neueRunde;
+    }
+
+    function neueRunde() {
+        eingabe = [];
+        // Ein zufälliges Emoji zur Kette hinzufügen
+        sequenz.push(emojis[Math.floor(Math.random() * emojis.length)]);
+        
+        // Zeige dem Spieler die Folge für 2 Sekunden
+        statusEl.innerHTML = `Merke dir die Folge:<br><span style="font-size: 1.8rem; letter-spacing: 5px;">${sequenz.join(" ")}</span>`;
+        emojiArea.innerHTML = ""; // Buttons verstecken während des Merkens
+
+        setTimeout(() => {
+            statusEl.innerText = "Jetzt genau in der richtigen Reihenfolge nachklicken!";
+            
+            // Buttons zum Klicken wieder aufbauen
+            emojiArea.innerHTML = emojis.map(e => 
+                `<button class="game-btn" style="font-size: 1.5rem; padding: 10px 15px;" onclick="checkEmoji('${e}')">${e}</button>`
+            ).join("");
+        }, 2000);
+    }
+
+    window.checkEmoji = function(gewaehltesEmoji) {
+        eingabe.push(gewaehltesEmoji);
+        const aktuellerIndex = eingabe.length - 1;
+
+        // Prüfen, ob der Klick richtig war
+        if (eingabe[aktuellerIndex] !== sequenz[aktuellerIndex]) {
+            statusEl.innerHTML = `<span style="color: #ff4d4d; font-weight: bold;">Leider falsch! ❌</span><br>Du hast die Serie verloren. Spiel startet neu...`;
+            sequenz = [];
+            emojiArea.innerHTML = `<button class="game-btn" onclick="location.reload()">Nochmal versuchen</button>`;
+        } 
+        // Prüfen, ob die gesamte Kette richtig nachgeklickt wurde
+        else if (eingabe.length === sequenz.length) {
+            statusEl.innerHTML = `<span style="color: #4dff88; font-weight: bold;">Perfekt gemerkt! 🌟</span><br>Nächste Runde startet...`;
+            registerDailyWin(); // Entzündet die Samstags-Flamme!
+            setTimeout(neueRunde, 1200);
+        }
+    };
+}
