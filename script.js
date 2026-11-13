@@ -202,3 +202,6 @@ if (emojiArea) {
         }
     };
 }
+if (typeof neueRunde === "function") {
+    neueRunde();
+}
