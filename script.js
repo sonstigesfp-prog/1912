@@ -50,7 +50,7 @@ if (datetimeEl) {
         "Genieße deinen Tag und mach das, was dich glücklich macht! ☀️"
     ];
 
-    const wochentag = 6
+    const wochentag = 6;
     const quoteEl = document.getElementById('quote');
     if (quoteEl) {
         quoteEl.innerText = sprueche[wochentag];
