@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spruch des Tages</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFC0CB, #D291BC);
+            color: #FEFCFF;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 70px;
+            border-radius: 0px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            height:  90vh;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        /* CSS */
+        h1 {
+              display: block;
+                font-size:0.4em;
+                margin-top: 0.6em;
+                margin-bottom: 0.67em;
+                margin-left: 0;
+                margin-right: 0;
+                font-weight: bold;
+              }
+        p {
+            color: #FFFFFF;
+            text-indent: 30px;
+            text-transform: uppercase;
+          }    
+        
+        #datetime {
+            margin: 0 0 10px 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        .trennlinie {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            margin: 20px auto;
+            width: 80%;
+        }
+      
+        #quote {
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.9;
+        }
+       /* Navigation CSS */
+        }
+      .tabs li {
+        flex: 1
+      }
+      .tabs a {
+        display: block;
+        font-weight: bold;
+        color: var(--accent1-color); 
+        font-variant:normal;
+        text-decoration:None;
+      }
+      [aria-current="page"]{
+     background: var(--accent2-color);
+} 
+  nav a:focus,
+  nav a:hover,
+  nav a:active {    
+    text-decoration:underline;
+  }
+:root {
+	--background-color: #FFE4E1;
+	--accent1-color: #F08080;
+	--accent2-color: #FAF0E6;	
+	--text-color: black;
+}
+      nav a {
+      display: block;
+      padding: 1em;
+      text-decoration: none; 
+      font-weight: bold;
+      font-size: 0.4rem
+      border: thin solid var(--background-color);
+      border-radius: none;
+    color: var(--accent1-color); 
+    background-color: var(--background-color);
+      transition: all .25s ease-in;	  
+    }
+
+  nav a[aria-current] {
+	background-color: var(--accent2-color); 
+  }
+	
+    nav a:focus,
+    nav a:hover,
+    nav a[aria-current]:focus,
+    nav a[aria-current]:hover {    
+      color: var(--background-color); 
+      background-color: var(--accent1-color); 
+    }
+      nav a {
+        text-align: center;
+    }
+    nav li {
+      display: inline-block;
+}
+      .streak-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.kreis {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; 
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+
+.kreis.aktiv {
+    border-color: transparent;
+    background: transparent;
+    transform: scale(1.2);
+}
+      game-box {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+        }
+        .trennlinie {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            margin: 15px auto;
+            width: 80%;
+        }
+        #game-title {
+            margin: 0 0 5px 0;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .game-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 12px 18px;
+            margin: 6px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .game-btn:hover { background: rgba(255, 255, 255, 0.4); }
+        .game-btn:active { transform: scale(0.95); }
+        #game-status {
+            margin-top: 15px;
+            font-size: 1.05rem;
+            min-height: 24px;
+            line-height: 1.4;
+
+    </style>
+</head>
+<body>
+
+  
+<div class="container">
+  <!-- DEINE NAVIGATION -->
+    <nav class="tabs">
+        <ul>
+            <li><a href="index.html" class="seite-1" aria-current="page">Home</a></li>
+            <li><a href="seite_2.html" class="seite-2">Mini Games</a></li>
+        </ul>
+    </nav>
+  
+
+<section>
+   <nav class="Games">
+    <h2> MINI GAMES </h2>
+    <hr class="trennlinie">
+    <p> Daily mini Games: Spiele 7 Mal in folge und schalte das geheim spiel frei </p>
+     
+</section>
+  <div class="streak-box">
+    <div class="streak-header">
+        <span>Siegesserie</span>
+        <span id="streak-count">0 / 7 Tage</span>
+    </div>
+    
+    <div class="streak-dots" id="streak-dots">
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+        <span class="kreis"></span>
+    </div>
+
+    <button id="secret-btn" disabled>🔒 Geheim-Spiel (7 Tage nötig)</button>
+    <section>
+    <div class="game-box">
+            <h3 style="margin: 0 0 12px 0;">Duell gegen die Eule </h3>
+            <div id="game-area">
+                <button class="game-btn" onclick="playSSP(0)">🪨 Stein</button>
+                <button class="game-btn" onclick="playSSP(1)">📄 Papier</button>
+                <button class="game-btn" onclick="playSSP(2)">✂️ Schere</button>
+            </div>
+            <div id="game-status">Wähle ein Symbol, um das Spiel zu starten!</div>
+        </div>
+    </section>
+
+</div>
+
+ </div>
+
+<!-- Mini games  -->
+<script>
+    function getDatumKey(offsetDays) {
+        const d = new Date();
+        d.setDate(d.getDate() + offsetDays);
+        return d.toISOString().slice(0, 10);
+    }
+
+    const heuteKey = getDatumKey(0);
+    const gesternKey = getDatumKey(-1);
+
+    let streak = parseInt(localStorage.getItem('eulen_streak')) || 0;
+    let lastWinDate = localStorage.getItem('eulen_last_win') || "";
+
+    if (lastWinDate !== heuteKey && lastWinDate !== gesternKey) {
+        streak = 0;
+        localStorage.setItem('eulen_streak', 0);
+    }
+
+    // Wandelt die HTML-Kreise der Reihe nach in Flammen um
+    function updateStreakUI() {
+        const anzeige = Math.min(streak, 7);
+        document.getElementById('streak-count').innerText = anzeige + " / 7 Tage";
+        
+        const alleKreise = document.querySelectorAll('.kreis');
+        alleKreise.forEach((kreis, index) => {
+            if (index < anzeige) {
+                kreis.innerText = "🔥";
+                kreis.classList.add('aktiv');
+            } else {
+                kreis.innerText = "";
+                kreis.classList.remove('aktiv');
+            }
+        });
+
+        const secretBtn = document.getElementById('secret-btn');
+        if (secretBtn && streak >= 7) {
+            secretBtn.disabled = false;
+            secretBtn.classList.add('unlocked');
+            secretBtn.innerText = "🔓 Geheim-Spiel starten! 🌟";
+        }
+    }
+
+    function tagGeschafft() {
+        if (lastWinDate !== heuteKey) {
+            streak += 1;
+            lastWinDate = heuteKey;
+            localStorage.setItem('eulen_streak', streak);
+            localStorage.setItem('eulen_last_win', heuteKey);
+            updateStreakUI();
+
+            if (streak === 7) {
+                alert("🔥 Wahnsinn! 7 Flammen gesammelt! Das Geheim-Spiel ist jetzt frei!");
+            }
+        }
+    }
+
+    updateStreakUI();
+ 
+      updateStreakUI();
+
+    // 5. Spiel-Logik
+    const wahlNamen = ["🪨 Stein", "📄 Papier", "✂️ Schere"];
+
+    window.playSSP = function(spielerWahl) {
+        const euleWahl = Math.floor(Math.random() * 3);
+        const statusEl = document.getElementById('game-status');
+
+        if (spielerWahl === euleWahl) {
+            statusEl.innerHTML = `Unentschieden!<br>Ihr hattet beide <b>${wahlNamen[spielerWahl]}</b>.`;
+        } 
+        else if (
+            (spielerWahl === 0 && euleWahl === 2) || 
+            (spielerWahl === 1 && euleWahl === 0) || 
+            (spielerWahl === 2 && euleWahl === 1)
+        ) {
+            statusEl.innerHTML = `🎉 Gewonnen!<br>Die Eule hatte <b>${wahlNamen[euleWahl]}</b>.<br><span style="color: #4dff88; font-weight: bold;">+1 Flamme erhalten!</span>`;
+            registerDailyWin(); 
+        } 
+        else {
+            statusEl.innerHTML = `Verloren!<br>Die Eule hatte <b>${wahlNamen[euleWahl]}</b>.<br>Versuch es noch einmal! 😉`;
+        }
+    };     
