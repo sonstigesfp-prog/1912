@@ -2,16 +2,41 @@
     // =========================================
     // NEU AB HIER: Prüfung auf ersten Besuch
     // =========================================
-    if (!localStorage.getItem('schonBesucht')) {
-        const welcomeEl = document.getElementById('welcome-text');
-        welcomeEl.style.display = 'block';
-        localStorage.setItem('schonBesucht', 'true');
-
-        // Blendet "Welcome" nach 4 Sekunden sanft aus
-        setTimeout(() => {
-            welcomeEl.style.opacity = '0';
-        }, 4000);
+    // ==========================================
+// 2. CODE NUR FÜR DIE STARTSEITE (index.html)
+// ==========================================
+const datetimeEl = document.getElementById('datetime');
+if (datetimeEl) {
+    const welcomeEl = document.getElementById('welcome-text');
+    
+    if (welcomeEl) {
+        // Prüfen, ob der Nutzer SCHON EINMAL da war
+        if (localStorage.getItem('schonBesucht')) {
+            // Wenn ja: Direkt "1912" dauerhaft anzeigen
+            welcomeEl.innerText = "1912";
+            welcomeEl.style.display = 'block';
+            welcomeEl.style.opacity = '1';
+        } else {
+            // Wenn allererster Besuch: "Welcome" anzeigen
+            welcomeEl.innerText = "Welcome";
+            welcomeEl.style.display = 'block';
+            welcomeEl.style.opacity = '1';
+            
+            // Nach 4 Sekunden sanft ausblenden und dauerhaft gegen "1912" austauschen
+            setTimeout(() => {
+                welcomeEl.style.opacity = '0';
+                setTimeout(() => {
+                    welcomeEl.innerText = "1912";
+                    welcomeEl.style.opacity = '1';
+                    localStorage.setItem('schonBesucht', 'true');
+                }, 1500); // Wartet, bis das Ausblenden fertig ist
+            }, 4000);
+        }
     }
+
+    // Live-Uhrzeit & Datum (bleibt wie vorher)
+    function updateDateTime() {
+
     // =========================================
     // ENDE NEU (JavaScript)
     // =========================================
