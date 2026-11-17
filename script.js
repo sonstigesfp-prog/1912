@@ -6,8 +6,6 @@ if (datetimeEl) {
     const welcomeEl = document.getElementById('welcome-text');
     
     if (welcomeEl) {
-        // Prüfen, ob der Nutzer SCHON EINMAL da war
-        if (localStorage.getItem('schonBesucht')) {
             // Wenn ja: Direkt "1912" dauerhaft anzeigen
             welcomeEl.innerText = "1912";
             welcomeEl.style.display = 'block';
