@@ -10,12 +10,7 @@ if (datetimeEl) {
             welcomeEl.innerText = "1912";
             welcomeEl.style.display = 'block';
             welcomeEl.style.opacity = '1';
-        } else {
-            // Wenn allererster Besuch: "Welcome" anzeigen
-            welcomeEl.innerText = "Welcome";
-            welcomeEl.style.display = 'block';
-            welcomeEl.style.opacity = '1';
-            
+       
             // Nach 4 Sekunden sanft ausblenden und dauerhaft gegen "1912" austauschen
             setTimeout(() => {
                 welcomeEl.style.opacity = '0';
