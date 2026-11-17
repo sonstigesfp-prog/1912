@@ -59,6 +59,12 @@ if (datetimeEl) {
     updateDateTime();
     setInterval(updateDateTime, 1000);
 } // <--- HIER hat die schließende Klammer für "if (datetimeEl)" gefehlt!
+const stunde = new Date().getHours();
+let gruss = "Hallo! 🦉";
+if (stunde < 11) gruss = "Guten Morgen! ☕";
+else if (stunde < 18) gruss = "Schön, dass du da bist! 🌸";
+else gruss = "Guten Abend! ✨";
+document.getElementById('tagesgruss').innerText = gruss;
 
 
 // ==========================================
