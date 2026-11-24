@@ -51,14 +51,7 @@ if (datetimeEl) {
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
-} // <--- HIER hat die schließende Klammer für "if (datetimeEl)" gefehlt!
-const stunde = new Date().getHours();
-let gruss = "Hallo! 🦉";
-if (stunde < 11) gruss = "Guten Morgen! ☕";
-else if (stunde < 18) gruss = "Schön, dass du da bist! 🌸";
-else gruss = "Guten Abend! ✨";
-document.getElementById('tagesgruss').innerText = gruss;
-
+} 
 
 // ==========================================
 // 2. STREAK- & SPIEL-LOGIK (seite_2.html)
@@ -275,94 +268,102 @@ if (doBtn) {
             const ms = Date.now() - startZeit;
             bereit = false;
             doBtn.innerText = "Nochmal";
-Verwende Code mit Vorsicht.
-doBtn.style.background = "";
-if (ms <= 600) {
-status.innerHTML = <span style="color:#4dff88; font-weight:bold;">⚡ Blitzschnell (${ms} ms)! +1 Flamme!</span>;
-registerDailyWin();
-} else {
-status.innerText = ${ms} ms – versuch es unter 600 ms zu schaffen! 😉;
+            doBtn.style.background = "";
+            if (ms <= 600) {
+                status.innerHTML = `<span style="color:#4dff88; font-weight:bold;">⚡ Blitzschnell (${ms} ms)! +1 Flamme!</span>`;
+                registerDailyWin();
+            } else {
+                status.innerText = `${ms} ms – versuch es unter 600 ms zu schaffen! 😉`;
+            }
+        }
+    };
 }
-}
-};
-}
+
 // --- 5. FREITAG: SCHERE, STEIN, PAPIER ---
 const wahlNamen = ["🪨 Stein", "📄 Papier", "✂️ Schere"];
 window.playSSP = function(spielerWahl) {
-const euleWahl = Math.floor(Math.random() * 3);
-const statusEl = document.getElementById('game-status');
-if (!statusEl) return;
-if (spielerWahl === euleWahl) {
-statusEl.innerHTML = Unentschieden! Ihr hattet beide <b>${wahlNamen[spielerWahl]}</b>.;
-} else if ((spielerWahl === 0 && euleWahl === 2) || (spielerWahl === 1 && euleWahl === 0) || (spielerWahl === 2 && euleWahl === 1)) {
-statusEl.innerHTML = 🎉 Gewonnen! Eule hatte <b>${wahlNamen[euleWahl]}</b>. <span style="color:#4dff88; font-weight:bold;">+1 Flamme!</span>;
-registerDailyWin();
-} else {
-statusEl.innerHTML = Verloren! Eule hatte <b>${wahlNamen[euleWahl]}</b>. Nochmal! 😉;
-}
+    const euleWahl = Math.floor(Math.random() * 3);
+    const statusEl = document.getElementById('game-status');
+    if (!statusEl) return;
+
+    if (spielerWahl === euleWahl) {
+        statusEl.innerHTML = `Unentschieden! Ihr hattet beide <b>${wahlNamen[spielerWahl]}</b>.`;
+    } else if ((spielerWahl === 0 && euleWahl === 2) || (spielerWahl === 1 && euleWahl === 0) || (spielerWahl === 2 && euleWahl === 1)) {
+        statusEl.innerHTML = `🎉 Gewonnen! Eule hatte <b>${wahlNamen[euleWahl]}</b>. <span style="color:#4dff88; font-weight:bold;">+1 Flamme!</span>`;
+        registerDailyWin();
+    } else {
+        statusEl.innerHTML = `Verloren! Eule hatte <b>${wahlNamen[euleWahl]}</b>. Nochmal! 😉`;
+    }
 };
+
 // --- 6. SAMSTAG: EMOJI-MEMORY ---
 const emojiArea = document.getElementById('emoji-game-area');
 if (emojiArea) {
-const emojis = ["🦉", "🌸", "⭐", "☕"];
-let sequenz = [], eingabe = [];
-const statusEl = document.getElementById('emoji-game-status');
-const startBtn = document.getElementById('start-emoji-btn');
-function neueRunde() {
-eingabe = [];
-sequenz.push(emojis[Math.floor(Math.random() * emojis.length)]);
-statusEl.innerHTML = Merken:<br><span style="font-size: 1.6rem; letter-spacing: 5px;">${sequenz.join(" ")}</span>;
-emojiArea.innerHTML = "";
-setTimeout(() => {
-statusEl.innerText = "Jetzt nachklicken!";
-emojiArea.innerHTML = emojis.map(e => <button class="game-btn" style="font-size: 1.4rem;" onclick="checkEmoji('${e}')">${e}</button>).join("");
-}, 1800);
+    const emojis = ["🦉", "🌸", "⭐", "☕"];
+    let sequenz = [], eingabe = [];
+    const statusEl = document.getElementById('emoji-game-status');
+    const startBtn = document.getElementById('start-emoji-btn');
+
+    function neueRunde() {
+        eingabe = [];
+        sequenz.push(emojis[Math.floor(Math.random() * emojis.length)]);
+        statusEl.innerHTML = `Merken:<br><span style="font-size: 1.6rem; letter-spacing: 5px;">${sequenz.join(" ")}</span>`;
+        emojiArea.innerHTML = "";
+
+        setTimeout(() => {
+            statusEl.innerText = "Jetzt nachklicken!";
+            emojiArea.innerHTML = emojis.map(e => `<button class="game-btn" style="font-size: 1.4rem;" onclick="checkEmoji('${e}')">${e}</button>`).join("");
+        }, 1800);
+    }
+
+    if (startBtn) startBtn.onclick = neueRunde;
+
+    window.checkEmoji = function(gewaehlt) {
+        eingabe.push(gewaehlt);
+        const idx = eingabe.length - 1;
+        if (eingabe[idx] !== sequenz[idx]) {
+            statusEl.innerHTML = `<span style="color:#ff4d4d;">Falsch! ❌</span>`;
+            sequenz = [];
+            emojiArea.innerHTML = `<button class="game-btn" id="re-emoji">Nochmal</button>`;
+            document.getElementById('re-emoji').onclick = neueRunde;
+        } else if (eingabe.length === sequenz.length) {
+            statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">Perfekt! 🌟 +1 Flamme!</span>`;
+            registerDailyWin();
+            setTimeout(neueRunde, 1200);
+        }
+    };
 }
-if (startBtn) startBtn.onclick = neueRunde;
-window.checkEmoji = function(gewaehlt) {
-eingabe.push(gewaehlt);
-const idx = eingabe.length - 1;
-if (eingabe[idx] !== sequenz[idx]) {
-statusEl.innerHTML = <span style="color:#ff4d4d;">Falsch! ❌</span>;
-sequenz = [];
-emojiArea.innerHTML = <button class="game-btn" id="re-emoji">Nochmal</button>;
-document.getElementById('re-emoji').onclick = neueRunde;
-} else if (eingabe.length === sequenz.length) {
-statusEl.innerHTML = <span style="color:#4dff88; font-weight:bold;">Perfekt! 🌟 +1 Flamme!</span>;
-registerDailyWin();
-setTimeout(neueRunde, 1200);
-}
-};
-}
+
 // --- 7. SONNTAG: HERZ-KLICKER ---
 const herzBtn = document.getElementById('herz-klick-btn');
 if (herzBtn) {
-let klicks = 0, zeit = 10, aktiv = false, cooldown = false;
-const statusEl = document.getElementById('klick-game-status');
-herzBtn.onclick = function() {
-if (cooldown) return;
-if (!aktiv) {
-aktiv = true; klicks = 0; zeit = 10;
-const timer = setInterval(() => {
-zeit--;
-if (zeit > 0) {
-statusEl.innerHTML = Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>;
-} else {
-clearInterval(timer);
-aktiv = false; cooldown = true;
-if (klicks >= 15) {
-statusEl.innerHTML = <span style="color:#4dff88; font-weight:bold;">🎉 ${klicks} Klicks! +1 Flamme!</span>;
-registerDailyWin();
-} else {
-statusEl.innerHTML = Nur ${klicks} Klicks (15 nötig). Nochmal! 😉;
-}
-setTimeout(() => { cooldown = false; herzBtn.innerText = "💖 Nochmal!"; }, 1500);
-}
-}, 1000);
-}
-if (aktiv) {
-klicks++;
-statusEl.innerHTML = Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>;
-}
-};
+    let klicks = 0, zeit = 10, aktiv = false, cooldown = false;
+    const statusEl = document.getElementById('klick-game-status');
+
+    herzBtn.onclick = function() {
+        if (cooldown) return;
+        if (!aktiv) {
+            aktiv = true; klicks = 0; zeit = 10;
+            const timer = setInterval(() => {
+                zeit--;
+                if (zeit > 0) {
+                    statusEl.innerHTML = `Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>`;
+                } else {
+                    clearInterval(timer);
+                    aktiv = false; cooldown = true;
+                    if (klicks >= 15) {
+                        statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 ${klicks} Klicks! +1 Flamme!</span>`;
+                        registerDailyWin();
+                    } else {
+                        statusEl.innerHTML = `Nur ${klicks} Klicks (15 nötig). Nochmal! 😉`;
+                    }
+                    setTimeout(() => { cooldown = false; herzBtn.innerText = "💖 Nochmal!"; }, 1500);
+                }
+            }, 1000);
+        }
+        if (aktiv) {
+            klicks++;
+            statusEl.innerHTML = `Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>`;
+        }
+    };
 }
