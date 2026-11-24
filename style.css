@@ -1,130 +1,261 @@
-body {
-            background: linear-gradient(135deg, #FFC0CB, #D291BC);
-            color: #FEFCFF;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 70px;
-            border-radius: 0px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            height:  90vh;
-            max-width: 450px;
-            width: 100%;
-        }
-
-        /* CSS */
-        .eule-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-            height: 110px;
-        }
-        #welcome-text {
-            position: absolute;
-            z-index: 1; /* Liegt hinter der Eule */
-            font-size: 6rem;
-            font-weight: 800;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.35);
-            user-select: none;
-            display: none; /* Standardmäßig unsichtbar */
-            transition: opacity 1.5s ease; /* Sanftes Ausblenden */
-        }
-        .eule-gif {
-            position: relative;
-            z-index: 2; /* Liegt vor dem Welcome-Text */
-            width: 90px;
-            height: auto;
-        }
-        
-        #datetime {
-            margin: 0 0 10px 0;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-        .trennlinie {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-            margin: 20px auto;
-            width: 80%;
-        }
-      
-        #quote {
-            font-style: italic;
-            font-size: 1.25rem;
-            line-height: 1.6;
-            margin: 0;
-            opacity: 0.9;
-        }
-       /* Navigation CSS */
-        }
-      .tabs li {
-        flex: 1
-      }
-      .tabs a {
-        display: block;
-        font-weight: bold;
-        color: var(--accent1-color); 
-        font-variant:normal;
-        text-decoration:None;
-      }
-      [aria-current="page"]{
-     background: var(--accent2-color);
-} 
-  nav a:focus,
-  nav a:hover,
-  nav a:active {    
-    text-decoration:underline;
-  }
 :root {
-	--background-color: #FFE4E1;
-	--accent1-color: #F08080;
-	--accent2-color: #FAF0E6;	
-	--text-color: black;
+    --background-color: #FFE4E1;
+    --accent1-color: #F08080;
+    --accent2-color: #FAF0E6;	
+    --text-color: black;
 }
-      nav a {
-      display: block;
-      padding: 1em;
-      text-decoration: none; 
-      font-weight: bold;
-      font-size: 0.4rem
-      border: thin solid var(--background-color);
-      border-radius: none;
+
+body {
+    background: linear-gradient(135deg, #FFC0CB, #D291BC);
+    color: #FEFCFF;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Flexibel statt fest 100vh, damit man bei den Spielen scrollen kann */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px 30px; /* Etwas kompakter, damit mehr Platz für Inhalte bleibt */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-height: 85vh; /* Wächst bei den 7 Spielen automatisch mit */
+    max-width: 450px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+.tabs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.tabs li {
+    flex: 1;
+}
+
+nav a {
+    display: block;
+    padding: 0.8em;
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 0.95rem; /* Semikolon ergänzt & gut lesbare Größe */
+    text-align: center;
+    border: thin solid var(--background-color);
+    border-radius: 8px;
     color: var(--accent1-color); 
     background-color: var(--background-color);
-      transition: all .25s ease-in;	  
-    }
+    transition: all .25s ease-in;	  
+}
 
-  nav a[aria-current] {
-	background-color: var(--accent2-color); 
-  }
-	
-    nav a:focus,
-    nav a:hover,
-    nav a[aria-current]:focus,
-    nav a[aria-current]:hover {    
-      color: var(--background-color); 
-      background-color: var(--accent1-color); 
-    }
-      nav a {
-        text-align: center;
-    }
-    nav li {
-      display: inline-block;
+nav a[aria-current="page"] {
+    background-color: var(--accent2-color); 
+}
+
+nav a:focus,
+nav a:hover,
+nav a[aria-current="page"]:focus,
+nav a[aria-current="page"]:hover {    
+    color: var(--background-color); 
+    background-color: var(--accent1-color); 
+    text-decoration: underline;
+}
+
+/* =========================================
+   STARTSEITE (Eule, Welcome, Datum, Spruch)
+   ========================================= */
+.eule-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 110px;
+}
+
+#welcome-text {
+    position: absolute;
+    z-index: 1;
+    font-size: 4.5rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    user-select: none;
+    display: none;
+    transition: opacity 1.5s ease;
+}
+
+.eule-gif {
+    position: relative;
+    z-index: 2;
+    width: 90px;
+    height: auto;
+}
+
+#datetime {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.trennlinie {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    margin: 20px auto;
+    width: 80%;
+}
+
+#quote {
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* =========================================
+   MINI-GAMES & 7-TAGE-SIEGESSERIE
+   ========================================= */
+.streak-box {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 18px;
+}
+
+.streak-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.streak-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.kreis {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.kreis.aktiv {
+    border-color: transparent;
+    background: transparent;
+    transform: scale(1.2);
+}
+
+#secret-btn {
+    margin-top: 8px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s;
+}
+
+#secret-btn.unlocked {
+    background: linear-gradient(45deg, #ffd700, #ff8c00);
+    color: #2b102f;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.game-box {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 15px;
+}
+
+.game-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.15rem;
+}
+
+.game-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 9px 15px;
+    margin: 4px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.game-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.game-btn:active {
+    transform: scale(0.95);
+}
+
+.game-input {
+    padding: 9px;
+    border-radius: 8px;
+    border: none;
+    width: 80px;
+    text-align: center;
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+.game-status {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    min-height: 22px;
+}
+
+.secret-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 240px;
+    margin: 10px auto 0 auto;
+}
+
+.secret-cell {
+    height: 60px;
+    font-size: 1.6rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
 }
 
