@@ -7,7 +7,7 @@ if (datetimeEl) {
     
     if (welcomeEl) {
             // Wenn ja: Direkt "1912" dauerhaft anzeigen
-            welcomeEl.innerText = "1912";
+            welcomeEl.innerText = "welcome";
             welcomeEl.style.display = 'block';
             welcomeEl.style.opacity = '1';
        
@@ -21,7 +21,7 @@ if (datetimeEl) {
                 }, 1500); // Wartet, bis das Ausblenden fertig ist
             }, 4000);
         }
-    }
+    
 
     // Live-Uhrzeit & Datum
     function updateDateTime() {
@@ -43,7 +43,7 @@ if (datetimeEl) {
         "Genieße deinen Tag und mach das, was dich glücklich macht! ☀️"
     ];
 
-    const wochentag = 6;
+    const wochentag = new Date().getDay();
     const quoteEl = document.getElementById('quote');
     if (quoteEl) {
         quoteEl.innerText = sprueche[wochentag];
