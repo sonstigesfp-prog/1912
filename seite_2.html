@@ -45,26 +45,73 @@
     </div>
 
     <button id="secret-btn" disabled>🔒 Geheim-Spiel (7 Tage nötig)</button>
-       <!-- FREITAGS-SPIEL (DUELL GEGEN DIE EULE) -->
-    <div class="game-box">
-            <h3 style="margin: 0 0 12px 0;">Duell gegen die Eule </h3>
-            <div id="game-area">
-                <button class="game-btn" onclick="playSSP(0)">🪨 Stein</button>
-                <button class="game-btn" onclick="playSSP(1)">📄 Papier</button>
-                <button class="game-btn" onclick="playSSP(2)">✂️ Schere</button>
-            </div>
-            <div id="game-status">Wähle ein Symbol, um das Spiel zu starten!</div>
-        </div>
-<!-- Das Samstags-Spielfeld für den Sofort-Test -->
-<div class="game-box" id="samstag-box" style="margin-top: 15px;">
-    <h3 style="margin: 0 0 12px 0;">Emoji-Gedächtnistest 🦉</h3>
-    <div id="emoji-game-area">
-        <button class="game-btn" id="start-emoji-btn">Spiel starten</button>
+     <div id="secret-game-area"></div>
     </div>
-    <div id="emoji-game-status" style="margin-top: 15px; font-size: 1.05rem; min-height: 24px;">
-        Klicke auf Start, um die Folge zu sehen!
-     </div>
 
+    <!-- TAG 1: MONTAG -->
+    <div class="game-box">
+        <h3>1. Montag: Mathe-Sprint 🧮</h3>
+        <div id="mo-area"></div>
+        <div class="game-status" id="mo-status">Löse 3 Aufgaben richtig für deine Flamme!</div>
     </div>
+
+    <!-- TAG 2: DIENSTAG -->
+    <div class="game-box">
+        <h3>2. Dienstag: Farb-Check 🎨</h3>
+        <div id="di-area"></div>
+        <div class="game-status" id="di-status">Stimmt das Wort mit der Schriftfarbe überein?</div>
+    </div>
+
+    <!-- TAG 3: MITTWOCH -->
+    <div class="game-box">
+        <h3>3. Mittwoch: Zahlenraten (1–50) 🔢</h3>
+        <div id="mi-area">
+            <input type="number" id="mi-input" class="game-input" min="1" max="50" placeholder="1-50">
+            <button class="game-btn" id="mi-btn">Raten</button>
+        </div>
+        <div class="game-status" id="mi-status">Finde die geheime Zahl!</div>
+    </div>
+
+    <!-- TAG 4: DONNERSTAG -->
+    <div class="game-box">
+        <h3>4. Donnerstag: Reaktions-Test ⚡</h3>
+        <div id="do-area">
+            <button class="game-btn" id="do-btn" style="width: 80%; padding: 14px;">Starten</button>
+        </div>
+        <div class="game-status" id="do-status">Klicke, sobald das Feld grün wird!</div>
+    </div>
+
+    <!-- TAG 5: FREITAG -->
+    <div class="game-box">
+        <h3>5. Freitag: Duell gegen die Eule ✌️</h3>
+        <div id="fr-area">
+            <button class="game-btn" onclick="playSSP(0)">🪨 Stein</button>
+            <button class="game-btn" onclick="playSSP(1)">📄 Papier</button>
+            <button class="game-btn" onclick="playSSP(2)">✂️ Schere</button>
+        </div>
+        <div class="game-status" id="game-status">Wähle ein Symbol!</div>
+    </div>
+
+    <!-- TAG 6: SAMSTAG -->
+    <div class="game-box">
+        <h3>6. Samstag: Emoji-Gedächtnis 🦉</h3>
+        <div id="emoji-game-area">
+            <button class="game-btn" id="start-emoji-btn">Spiel starten</button>
+        </div>
+        <div class="game-status" id="emoji-game-status">Merke dir die Reihenfolge!</div>
+    </div>
+
+    <!-- TAG 7: SONNTAG -->
+    <div class="game-box">
+        <h3>7. Sonntag: Herz-Klicker (10 Sek.) 💖</h3>
+        <div id="klick-game-area">
+            <button class="game-btn" id="herz-klick-btn" style="font-size: 1.4rem; padding: 12px 22px;">💖 Klick mich!</button>
+        </div>
+        <div class="game-status" id="klick-game-status">Schaffe mindestens 15 Klicks in 10 Sekunden!</div>
+    </div>
+
 </div>
 
+<script src="script.js"></script>
+</body>
+</html> 
