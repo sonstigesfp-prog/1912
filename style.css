@@ -47,7 +47,7 @@ body {
         .eule-gif {
             position: relative;
             z-index: 2; /* Liegt vor dem Welcome-Text */
-            width: 100px;
+            width: 90px;
             height: auto;
         }
         
