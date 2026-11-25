@@ -5,6 +5,10 @@
     --text-color: black;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: linear-gradient(135deg, #FFC0CB, #D291BC);
     color: #FEFCFF;
@@ -12,57 +16,67 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Flexibel statt fest 100vh, damit man bei den Spielen scrollen kann */
+    min-height: 100vh;
     margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 15px;
+    overflow-x: hidden; /* Verhindert seitliches Wackeln am Handy */
 }
 
 .container {
     text-align: center;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 40px 30px; /* Etwas kompakter, damit mehr Platz für Inhalte bleibt */
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 25px 18px;
+    border-radius: 16px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    min-height: 85vh; /* Wächst bei den 7 Spielen automatisch mit */
     max-width: 450px;
     width: 100%;
-    box-sizing: border-box;
 }
 
 /* =========================================
-   NAVIGATION
+   HANDY-OPTIMIERTE NAVIGATION (TABS)
    ========================================= */
+.tabs {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .tabs ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 25px 0;
+    margin: 0;
     display: flex;
-    gap: 10px;
+    width: 100%;
+    gap: 8px;
 }
 
 .tabs li {
     flex: 1;
+    display: flex;
 }
 
 nav a {
-    display: block;
-    padding: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 12px 8px;
     text-decoration: none; 
     font-weight: bold;
-    font-size: 0.95rem; /* Semikolon ergänzt & gut lesbare Größe */
-    text-align: center;
-    border: thin solid var(--background-color);
-    border-radius: 8px;
+    font-size: 0.95rem;
+    white-space: nowrap; /* Verhindert unschöne Zeilenumbrüche im Button */
+    border: 1px solid var(--background-color);
+    border-radius: 10px;
     color: var(--accent1-color); 
     background-color: var(--background-color);
-    transition: all .25s ease-in;	  
+    transition: all 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 nav a[aria-current="page"] {
-    background-color: var(--accent2-color); 
+    background-color: var(--accent2-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 nav a:focus,
@@ -71,7 +85,6 @@ nav a[aria-current="page"]:focus,
 nav a[aria-current="page"]:hover {    
     color: var(--background-color); 
     background-color: var(--accent1-color); 
-    text-decoration: underline;
 }
 
 /* =========================================
@@ -84,48 +97,50 @@ nav a[aria-current="page"]:hover {
     align-items: center;
     margin-bottom: 10px;
     height: 110px;
+    width: 100%;
+    overflow: hidden;
 }
 
 #welcome-text {
     position: absolute;
     z-index: 1;
-    font-size: 4.5rem;
+    font-size: clamp(2.2rem, 11vw, 4rem); /* Passt sich der Handy-Breite an */
     font-weight: 800;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.35);
     user-select: none;
-    display: none;
     transition: opacity 1.5s ease;
 }
 
 .eule-gif {
     position: relative;
     z-index: 2;
-    width: 90px;
+    width: 85px;
     height: auto;
 }
 
 #datetime {
     margin: 0 0 10px 0;
-    font-size: 1.8rem;
+    font-size: 1.45rem;
     font-weight: 600;
+    line-height: 1.3;
 }
 
 .trennlinie {
     border: 0;
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
-    margin: 20px auto;
+    margin: 18px auto;
     width: 80%;
 }
 
 #quote {
     font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.5;
     margin: 0;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 /* =========================================
@@ -135,15 +150,15 @@ nav a[aria-current="page"]:hover {
     background: rgba(255, 215, 0, 0.15);
     border: 1px solid rgba(255, 215, 0, 0.4);
     border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 18px;
+    padding: 12px;
+    margin-bottom: 15px;
 }
 
 .streak-header {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 8px;
 }
 
@@ -151,20 +166,20 @@ nav a[aria-current="page"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
+    gap: 6px;
+    margin: 8px 0;
 }
 
 .kreis {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.5);
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -177,10 +192,11 @@ nav a[aria-current="page"]:hover {
 #secret-btn {
     margin-top: 8px;
     width: 100%;
-    padding: 10px;
+    padding: 11px;
     border-radius: 8px;
     border: none;
     font-weight: bold;
+    font-size: 0.95rem;
     cursor: not-allowed;
     background: rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.6);
@@ -197,25 +213,26 @@ nav a[aria-current="page"]:hover {
 .game-box {
     background: rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    padding: 16px;
-    margin-top: 15px;
+    padding: 15px 12px;
+    margin-top: 12px;
 }
 
 .game-box h3 {
     margin: 0 0 10px 0;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
 }
 
 .game-btn {
     background: rgba(255, 255, 255, 0.25);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 9px 15px;
+    padding: 11px 14px;
     margin: 4px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .game-btn:hover {
@@ -227,10 +244,10 @@ nav a[aria-current="page"]:hover {
 }
 
 .game-input {
-    padding: 9px;
+    padding: 10px;
     border-radius: 8px;
     border: none;
-    width: 80px;
+    width: 85px;
     text-align: center;
     font-size: 1rem;
     margin-right: 5px;
@@ -240,6 +257,7 @@ nav a[aria-current="page"]:hover {
     margin-top: 10px;
     font-size: 0.95rem;
     min-height: 22px;
+    line-height: 1.4;
 }
 
 .secret-grid {
