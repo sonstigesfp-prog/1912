@@ -34,10 +34,10 @@ if (datetimeEl) {
     }
 
     const sprueche = [
-        "Zeit zum Entspannen und Kraft tanken für die neue Woche! ☕",
+        "Montag = Arbeitszeitbetrug.  ",
         "Neuer Tag, neue Chancen. Lass uns durchstarten! 💪",
         "Der zweite Schritt ist getan. Du bist auf dem richtigen Weg! ✨",
-        "Die Hälfte ist geschafft! Bergfest! 🎉",
+        "Revolution Day! Time to take over the world🎉",
         "Das Wochenende ist schon in Sicht, bleib dran! ☕",
         "Fast geschafft! Hab einen großartigen Start ins Wochenende! 🥂",
         "Genieße deinen Tag und mach das, was dich glücklich macht! ☀️"
