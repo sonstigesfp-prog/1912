@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samstag - Emoji-Gedächtnis</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Samstag - Eulen-Wordle</title>
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <div class="container">
@@ -13,12 +13,21 @@
             <li><a href="seite_2.html">⬅️ Zurück zu Mini Games</a></li>
         </ul>
     </nav>
-    <div class="game-box">
-        <h3>6. Samstag: Emoji-Gedächtnis 🦉</h3>
-        <div id="emoji-game-area">
-            <button class="game-btn" id="start-emoji-btn">Spiel starten</button>
+
+    <div class="game-box" id="wordle-game-area">
+        <h3>6. Samstag: Eulen-Wordle 🟩</h3>
+        <p style="font-size: 0.9rem; opacity: 0.85; margin: 0 0 12px 0;">Errate das geheime 5-Buchstaben-Wort in 6 Versuchen!</p>
+        
+        <!-- 6x5 Wordle-Gitter -->
+        <div id="wordle-board" class="wordle-board"></div>
+
+        <!-- Eingabe für Smartphone & PC -->
+        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 8px;">
+            <input type="text" id="wordle-input" maxlength="5" placeholder="5 Buchstaben" autocomplete="off" style="text-transform: uppercase; padding: 10px; border-radius: 8px; border: none; width: 140px; text-align: center; font-size: 1.1rem; font-weight: bold;">
+            <button class="game-btn" id="wordle-btn" style="margin: 0;">Prüfen</button>
         </div>
-        <div class="game-status" id="emoji-game-status">Merke dir die Reihenfolge!</div>
+
+        <div class="game-status" id="wordle-status">Viel Glück! 🦉</div>
     </div>
 </div>
 <script src="script.js"></script>
