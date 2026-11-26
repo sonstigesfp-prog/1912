@@ -13,20 +13,22 @@
             <li><a href="seite_2.html">⬅️ Zurück zu Mini Games</a></li>
         </ul>
     </nav>
-    <div class="game-box">
-        <h3>3. Mittwoch: Zahlenraten (1–100) 🔢</h3>
-        <details class="anleitung-box">
-    <summary>Ria erklärt !✌ Ja Kostenlose 😘 </summary>
-    <p>Kannst du meine gedanken lesen? Ich hab mir eine Zahl zwischen 1-100 ausgedacht</p>
-</details>
+   <div class="game-box">
+    <h3>3. Mittwoch: Zahlen-Wordle (1–100) 🔢</h3>
+    <p style="font-size: 0.9rem; opacity: 0.85; margin: 0 0 12px 0;">Errate die geheime Zahl in maximal 5 Versuchen!</p>
 
-        <div id="mi-area">
-            <input type="number" id="mi-input" class="game-input" min="1" max="100" placeholder="1-100">
-            <button class="game-btn" id="mi-btn">Raten</button>
-        </div>
-        <div class="game-status" id="mi-status">Finde die geheime Zahl!</div>
+    <!-- 5 Kästchen-Zeilen für die 5 Versuche -->
+    <div id="mi-board" class="mi-board"></div>
+
+    <!-- Eingabefeld & Button -->
+    <div id="mi-area" style="margin-top: 15px; display: flex; justify-content: center; gap: 8px;">
+        <input type="number" id="mi-input" class="game-input" min="1" max="100" placeholder="1-100" style="margin: 0; width: 100px;">
+        <button class="game-btn" id="mi-btn" style="margin: 0;">Raten</button>
     </div>
+
+    <div class="game-status" id="mi-status">Du hast noch 5 Versuche! 🦉</div>
 </div>
+    
 <script src="script.js"></script>
 </body>
 </html>
