@@ -277,3 +277,51 @@ nav a[aria-current="page"]:hover {
     cursor: pointer;
 }
 
+/* =========================================
+   SAMSTAG: WORDLE-GITTER
+   ========================================= */
+.wordle-board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 6px;
+    max-width: 240px;
+    margin: 0 auto;
+}
+
+.wordle-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+.wordle-cell {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    color: #fff;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.wordle-cell.richtig {
+    background: #2a9d8f; /* Grün: Richtiger Buchstabe am richtigen Platz */
+    border-color: #2a9d8f;
+}
+
+.wordle-cell.vorhanden {
+    background: #e9c46a; /* Gelb: Buchstabe im Wort, aber falscher Platz */
+    border-color: #e9c46a;
+    color: #2b102f;
+}
+
+.wordle-cell.falsch {
+    background: rgba(0, 0, 0, 0.35); /* Dunkelgrau: Nicht im Wort */
+    border-color: transparent;
+    opacity: 0.7;
+}
