@@ -276,6 +276,42 @@ nav a[aria-current="page"]:hover {
     border-radius: 8px;
     cursor: pointer;
 }
+/* =========================================
+   MITTWOCH: 5-VERSUCHE-GITTER (WIE WORDLE)
+   ========================================= */
+.mi-board {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+.mi-row {
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.mi-row.falsch {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mi-row.richtig {
+    background: #2a9d8f; /* Wordle-Grün bei Volltreffer */
+    border-color: #2a9d8f;
+    transform: scale(1.03);
+}
 
 /* =========================================
    SAMSTAG: WORDLE-GITTER
