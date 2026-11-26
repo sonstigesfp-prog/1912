@@ -229,22 +229,66 @@ if (diArea) {
 }
 
 // --- 3. MITTWOCH: ZAHLENRATEN ---
-const miBtn = document.getElementById('mi-btn');
-if (miBtn) {
+// --- 3. MITTWOCH: ZAHLEN-WORDLE (5 VERSUCHE, 1-100) ---
+const miBoard = document.getElementById('mi-board');
+if (miBoard) {
     let zielZahl = Math.floor(Math.random() * 100) + 1;
-    miBtn.onclick = () => {
-        const tipp = parseInt(document.getElementById('mi-input').value);
-        const status = document.getElementById('mi-status');
-        if (tipp === zielZahl) {
-            status.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 Treffer! Die Zahl war ${zielZahl}! +1 Flamme!</span>`;
-            registerDailyWin();
-            zielZahl = Math.floor(Math.random() * 100) + 1;
-        } else if (tipp < zielZahl) {
-            status.innerText = "Zu niedrig! Höher raten ⬆️";
-        } else if (tipp > zielZahl) {
-            status.innerText = "Zu hoch! Tiefer raten ⬇️";
+    let versuch = 0;
+    const maxVersuche = 5;
+    let spielVorbei = false;
+
+    // 5 leere Reihen wie bei Wordle aufbauen
+    for (let i = 0; i < maxVersuche; i++) {
+        const row = document.createElement('div');
+        row.className = 'mi-row';
+        row.id = `mi-row-${i}`;
+        miBoard.appendChild(row);
+    }
+
+    const inputEl = document.getElementById('mi-input');
+    const btnEl = document.getElementById('mi-btn');
+    const status = document.getElementById('mi-status');
+
+    function pruefeZahl() {
+        if (spielVorbei) return;
+        const tipp = parseInt(inputEl.value);
+
+        if (isNaN(tipp) || tipp < 1 || tipp > 100) {
+            status.innerText = "⚠️ Bitte eine Zahl zwischen 1 und 100 eingeben!";
+            return;
         }
-    };
+
+        const aktuelleReihe = document.getElementById(`mi-row-${versuch}`);
+        versuch++;
+        inputEl.value = "";
+
+        if (tipp === zielZahl) {
+            spielVorbei = true;
+            aktuelleReihe.innerHTML = `${tipp} 🎉`;
+            aktuelleReihe.classList.add('richtig');
+            status.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 Erraten in ${versuch}/${maxVersuche} Versuchen! +1 Flamme!</span>`;
+            registerDailyWin();
+        } else {
+            const pfeil = tipp < zielZahl ? "⬆️" : "⬇️";
+            const hinweis = tipp < zielZahl ? "Zu niedrig! Höher raten" : "Zu hoch! Tiefer raten";
+            aktuelleReihe.innerHTML = `${tipp} ${pfeil}`;
+            aktuelleReihe.classList.add('falsch');
+
+            if (versuch >= maxVersuche) {
+                spielVorbei = true;
+                status.innerHTML = `Leider vorbei! Die Zahl war <b>${zielZahl}</b>.<br><button class="game-btn" onclick="location.reload()" style="margin-top:8px;">Nochmal spielen</button>`;
+            } else {
+                const rest = maxVersuche - versuch;
+                status.innerText = `${hinweis} (noch ${rest} ${rest === 1 ? 'Versuch' : 'Versuche'})`;
+                inputEl.focus();
+            }
+        }
+    }
+
+    btnEl.onclick = pruefeZahl;
+    inputEl.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') pruefeZahl();
+    });
 }
 
 // --- 4. DONNERSTAG: REAKTIONS-TEST ---
