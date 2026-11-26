@@ -231,14 +231,14 @@ if (diArea) {
 // --- 3. MITTWOCH: ZAHLENRATEN ---
 const miBtn = document.getElementById('mi-btn');
 if (miBtn) {
-    let zielZahl = Math.floor(Math.random() * 50) + 1;
+    let zielZahl = Math.floor(Math.random() * 100) + 1;
     miBtn.onclick = () => {
         const tipp = parseInt(document.getElementById('mi-input').value);
         const status = document.getElementById('mi-status');
         if (tipp === zielZahl) {
             status.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 Treffer! Die Zahl war ${zielZahl}! +1 Flamme!</span>`;
             registerDailyWin();
-            zielZahl = Math.floor(Math.random() * 50) + 1;
+            zielZahl = Math.floor(Math.random() * 100) + 1;
         } else if (tipp < zielZahl) {
             status.innerText = "Zu niedrig! Höher raten ⬆️";
         } else if (tipp > zielZahl) {
