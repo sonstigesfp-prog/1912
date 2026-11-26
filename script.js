@@ -300,7 +300,7 @@ window.playSSP = function(spielerWahl) {
 const wordleBoard = document.getElementById('wordle-board');
 if (wordleBoard) {
     // Wortliste (du kannst hier jederzeit eigene 5-Buchstaben-Wörter hinzufügen!)
-    const woerter = ["EULEN", "PARTY", "FEIER", "GLANZ", "TRAUM", "LIEBE", "STERN", "BLUME", "KERZE", "TORTE", "GLÜCK", "SONNE"];
+    const woerter = ["EULEN", "PARTY", "Waage", "GLANZ", "TRAUM", "LIEBE", "STERN", "BLUME", "KERZE", "TORTE", "GLÜCK", "SONNE" ];
     const zielWort = woerter[Math.floor(Math.random() * woerter.length)];
     let versuch = 0;
     let spielVorbei = false;
