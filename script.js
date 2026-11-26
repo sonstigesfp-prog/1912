@@ -296,42 +296,87 @@ window.playSSP = function(spielerWahl) {
     }
 };
 
-// --- 6. SAMSTAG: EMOJI-MEMORY ---
-const emojiArea = document.getElementById('emoji-game-area');
-if (emojiArea) {
-    const emojis = ["🦉", "🌸", "⭐", "☕"];
-    let sequenz = [], eingabe = [];
-    const statusEl = document.getElementById('emoji-game-status');
-    const startBtn = document.getElementById('start-emoji-btn');
+// -// --- 6. SAMSTAG: EULEN-WORDLE ---
+const wordleBoard = document.getElementById('wordle-board');
+if (wordleBoard) {
+    // Wortliste (du kannst hier jederzeit eigene 5-Buchstaben-Wörter hinzufügen!)
+    const woerter = ["EULEN", "PARTY", "FEIER", "GLANZ", "TRAUM", "LIEBE", "STERN", "BLUME", "KERZE", "TORTE", "GLÜCK", "SONNE"];
+    const zielWort = woerter[Math.floor(Math.random() * woerter.length)];
+    let versuch = 0;
+    let spielVorbei = false;
 
-    function neueRunde() {
-        eingabe = [];
-        sequenz.push(emojis[Math.floor(Math.random() * emojis.length)]);
-        statusEl.innerHTML = `Merken:<br><span style="font-size: 1.6rem; letter-spacing: 5px;">${sequenz.join(" ")}</span>`;
-        emojiArea.innerHTML = "";
-
-        setTimeout(() => {
-            statusEl.innerText = "Jetzt nachklicken!";
-            emojiArea.innerHTML = emojis.map(e => `<button class="game-btn" style="font-size: 1.4rem;" onclick="checkEmoji('${e}')">${e}</button>`).join("");
-        }, 1800);
+    // 6x5 leere Kästchen aufbauen
+    for (let r = 0; r < 6; r++) {
+        const row = document.createElement('div');
+        row.className = 'wordle-row';
+        for (let c = 0; c < 5; c++) {
+            const cell = document.createElement('div');
+            cell.className = 'wordle-cell';
+            cell.id = `w-${r}-${c}`;
+            row.appendChild(cell);
+        }
+        wordleBoard.appendChild(row);
     }
 
-    if (startBtn) startBtn.onclick = neueRunde;
+    const inputEl = document.getElementById('wordle-input');
+    const btnEl = document.getElementById('wordle-btn');
+    const statusEl = document.getElementById('wordle-status');
 
-    window.checkEmoji = function(gewaehlt) {
-        eingabe.push(gewaehlt);
-        const idx = eingabe.length - 1;
-        if (eingabe[idx] !== sequenz[idx]) {
-            statusEl.innerHTML = `<span style="color:#ff4d4d;">Falsch! ❌</span>`;
-            sequenz = [];
-            emojiArea.innerHTML = `<button class="game-btn" id="re-emoji">Nochmal</button>`;
-            document.getElementById('re-emoji').onclick = neueRunde;
-        } else if (eingabe.length === sequenz.length) {
-            statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">Perfekt! 🌟 +1 Flamme!</span>`;
-            registerDailyWin();
-            setTimeout(neueRunde, 1200);
+    function pruefeWort() {
+        if (spielVorbei) return;
+        const tipp = inputEl.value.trim().toUpperCase();
+
+        if (tipp.length !== 5) {
+            statusEl.innerText = "Bitte genau 5 Buchstaben eingeben! ✍️";
+            return;
         }
-    };
+
+        const zielArr = zielWort.split('');
+        const tippArr = tipp.split('');
+        const farben = Array(5).fill('falsch');
+
+        // 1. Durchlauf: Exakte Treffer (Grün) prüfen
+        for (let i = 0; i < 5; i++) {
+            if (tippArr[i] === zielArr[i]) {
+                farben[i] = 'richtig';
+                zielArr[i] = null; // Verhindert doppelte Wertung
+            }
+        }
+
+        // 2. Durchlauf: Vorhandene Buchstaben an falscher Stelle (Gelb) prüfen
+        for (let i = 0; i < 5; i++) {
+            if (farben[i] !== 'richtig' && zielArr.includes(tippArr[i])) {
+                farben[i] = 'vorhanden';
+                zielArr[zielArr.indexOf(tippArr[i])] = null;
+            }
+        }
+
+        // Kästchen im Gitter einfärben
+        for (let i = 0; i < 5; i++) {
+            const cell = document.getElementById(`w-${versuch}-${i}`);
+            cell.innerText = tippArr[i];
+            cell.classList.add(farben[i]);
+        }
+
+        versuch++;
+        inputEl.value = "";
+
+        if (tipp === zielWort) {
+            spielVorbei = true;
+            statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 Erraten! Das Wort war ${zielWort}! +1 Flamme!</span>`;
+            registerDailyWin();
+        } else if (versuch >= 6) {
+            spielVorbei = true;
+            statusEl.innerHTML = `Leider vorbei! Das Wort war <b>${zielWort}</b>. <br><button class="game-btn" onclick="location.reload()" style="margin-top:8px;">Nochmal spielen</button>`;
+        } else {
+            statusEl.innerText = `Versuch ${versuch} von 6 – weiter so!`;
+        }
+    }
+
+    btnEl.onclick = pruefeWort;
+    inputEl.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') pruefeWort();
+    });
 }
 
 // --- 7. SONNTAG: HERZ-KLICKER ---
