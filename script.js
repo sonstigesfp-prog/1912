@@ -444,35 +444,128 @@ if (wordleBoard) {
 }
 
 // --- 7. SONNTAG: HERZ-KLICKER ---
-const herzBtn = document.getElementById('herz-klick-btn');
-if (herzBtn) {
-    let klicks = 0, zeit = 10, aktiv = false, cooldown = false;
-    const statusEl = document.getElementById('klick-game-status');
-
-    herzBtn.onclick = function() {
-        if (cooldown) return;
-        if (!aktiv) {
-            aktiv = true; klicks = 0; zeit = 10;
-            const timer = setInterval(() => {
-                zeit--;
-                if (zeit > 0) {
-                    statusEl.innerHTML = `Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>`;
-                } else {
-                    clearInterval(timer);
-                    aktiv = false; cooldown = true;
-                    if (klicks >= 15) {
-                        statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 ${klicks} Klicks! +1 Flamme!</span>`;
-                        registerDailyWin();
-                    } else {
-                        statusEl.innerHTML = `Nur ${klicks} Klicks (15 nötig). Nochmal! 😉`;
-                    }
-                    setTimeout(() => { cooldown = false; herzBtn.innerText = "💖 Nochmal!"; }, 1500);
-                }
-            }, 1000);
+const songPlayer = document.getElementById('song-player');
+if (songPlayer) {
+    // Hier deine MP3-Dateien, den angezeigten Titel und alle akzeptierten Lösungen (kleingeschrieben!) eintragen:
+    const songs = [
+        {
+            datei: "song1.mp3",
+            anzeige: "Taylor Swift - Shake It Off",
+            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+        },
+        {
+            datei: "song2.mp3",
+            anzeige: "Queen - Bohemian Rhapsody",
+            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+        },
+        {
+            datei: "song3.mp3",
+            anzeige: "Miley Cyrus - Flowers",
+            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
         }
-        if (aktiv) {
-            klicks++;
-            statusEl.innerHTML = `Zeit: <b>${zeit}s</b> | Klicks: <b>${klicks}</b>`;
+        {
+            datei: "song4.mp3",
+            anzeige: "Taylor Swift - Shake It Off",
+            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+        },
+        {
+            datei: "song5.mp3",
+            anzeige: "Queen - Bohemian Rhapsody",
+            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+        },
+        {
+            datei: "song6.mp3",
+            anzeige: "Miley Cyrus - Flowers",
+            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+        } 
+     {
+            datei: "song7.mp3",
+            anzeige: "Taylor Swift - Shake It Off",
+            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+        },
+        {
+            datei: "song8.mp3",
+            anzeige: "Queen - Bohemian Rhapsody",
+            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+        },
+        {
+            datei: "song9.mp3",
+            anzeige: "Miley Cyrus - Flowers",
+            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+        }
+     {
+            datei: "song10.mp3",
+            anzeige: "Taylor Swift - Shake It Off",
+            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+        },
+        {
+            datei: "song11.mp3",
+            anzeige: "Queen - Bohemian Rhapsody",
+            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+        },
+        {
+            datei: "song12.mp3",
+            anzeige: "Miley Cyrus - Flowers",
+            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+        }
+    ];
+
+    let aktuellerIndex = 0;
+    let punkte = 0;
+
+    const playBtn = document.getElementById('play-song-btn');
+    const inputEl = document.getElementById('song-input');
+    const checkBtn = document.getElementById('song-check-btn');
+    const statusEl = document.getElementById('song-status');
+
+    function ladeSong() {
+        const s = songs[aktuellerIndex];
+        songPlayer.src = s.datei;
+        playBtn.innerText = "▶️ Song abspielen";
+        if (inputEl) inputEl.value = "";
+    }
+
+    playBtn.onclick = () => {
+        if (songPlayer.paused) {
+            songPlayer.play();
+            playBtn.innerText = "⏸️ Pause";
+        } else {
+            songPlayer.pause();
+            playBtn.innerText = "▶️ Weiterhören";
         }
     };
+
+    function pruefeEingabe() {
+        const tipp = inputEl.value.trim().toLowerCase(); // Wandelt alles in Kleinbuchstaben um
+        if (!tipp) return;
+
+        songPlayer.pause();
+        const s = songs[aktuellerIndex];
+
+        // Prüft, ob die Eingabe in deiner akzeptierten Liste steht
+        if (s.akzeptiert.includes(tipp)) {
+            punkte++;
+            if (punkte >= 3) {
+                statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 3/3 Songs erraten! +1 Flamme! 🔥</span>`;
+                registerDailyWin();
+                punkte = 0;
+            } else {
+                statusEl.innerHTML = `Richtig! Es war <b>${s.anzeige}</b> 🎶 (${punkte} / 3 geschafft)`;
+            }
+        } else {
+            statusEl.innerHTML = `<span style="color:#ff4d4d;">Leider falsch! ❌</span> Es war <b>${s.anzeige}</b>.`;
+        }
+
+        aktuellerIndex = (aktuellerIndex + 1) % songs.length;
+        setTimeout(ladeSong, 2000);
+    }
+
+    if (checkBtn) checkBtn.onclick = pruefeEingabe;
+    if (inputEl) {
+        inputEl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') pruefeEingabe();
+        });
+    }
+
+    ladeSong();
 }
