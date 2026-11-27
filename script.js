@@ -296,9 +296,9 @@ const doFrageEl = document.getElementById('do-frage');
 if (doFrageEl) {
     // Hier kannst du jederzeit eigene Fragen & Antworten ergänzen!
     const fragen = [
-        { text: "Eulen können ihren Kopf um bis zu 270 Grad drehen.", antwort: true },
-        { text: "Die Augen einer Eule sind so groß, dass sie sie nicht bewegen kann.", antwort: true },
-        { text: "Schokolade besteht ursprünglich aus gerösteten Kaffeebohnen.", antwort: false },
+        { text: "Monsta X debut ist am 14.05.2015.", antwort: true },
+        { text: "Stray kids debut song ist hellivator", antwort: true },
+        { text: "Papas ", antwort: false },
         { text: "Das Lied 'Happy Birthday' war der erste Song, der jemals auf dem Mars abgespielt wurde.", antwort: true },
         { text: "Honig kann bei richtiger Lagerung nach 5 Jahren schlecht werden.", antwort: false },
         { text: "Eine Gruppe von Eulen nennt man auf Englisch 'Parliament' (Parlament).", antwort: true },
