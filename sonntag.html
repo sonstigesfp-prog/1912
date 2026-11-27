@@ -14,16 +14,18 @@
         </ul>
     </nav>
     <div class="game-box">
-        <h3>7. Sonntag: Herz-Klicker (10 Sek.) 💖</h3>
+        <h3>Guess the Song 💿</h3>
        <details class="anleitung-box">
     <summary>Ria erklärt. Ja Kostenlose!</summary>
     <p> Guess the Song? Du hast 30 sek um zu erraten welcher Song es ist? </p>
 </details> 
-        <div id="klick-game-area">
-            <button class="game-btn" id="herz-klick-btn" style="font-size: 1.4rem; padding: 12px 22px;">💖 Klick mich!</button>
-        </div>
-        <div class="game-status" id="klick-game-status">Schaffe mindestens 15 Klicks in 10 Sekunden!</div>
-    </div>
+      
+     <!-- Versteckter Audio-Player + schicker Abspiel-Button -->
+       <!-- Eingabefeld zum Selbstschreiben -->
+<div style="display: flex; flex-direction: column; gap: 8px;">
+    <input type="text" id="song-input" placeholder="Songtitel eintippen..." autocomplete="off" style="padding: 12px; border-radius: 10px; border: none; text-align: center; font-size: 1.05rem;">
+    <button class="game-btn" id="song-check-btn" style="margin: 0; width: 100%; font-weight: bold;">Antwort prüfen</button>
+</div>
 </div>
 <script src="script.js"></script>
 </body>
