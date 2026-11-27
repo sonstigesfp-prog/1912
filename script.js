@@ -291,37 +291,57 @@ if (miBoard) {
     });
 }
 
-// --- 4. DONNERSTAG: REAKTIONS-TEST ---
-const doBtn = document.getElementById('do-btn');
-if (doBtn) {
-    let startZeit = 0, bereit = false, wartet = false;
-    doBtn.onclick = () => {
-        const status = document.getElementById('do-status');
-        if (!bereit && !wartet) {
-            wartet = true;
-            doBtn.innerText = "Warte auf Grün...";
-            doBtn.style.background = "#e63946";
-            setTimeout(() => {
-                doBtn.innerText = "JETZT KLICKEN!";
-                doBtn.style.background = "#2a9d8f";
-                startZeit = Date.now();
-                bereit = true;
-                wartet = false;
-            }, Math.random() * 2000 + 1000);
-        } else if (bereit) {
-            const ms = Date.now() - startZeit;
-            bereit = false;
-            doBtn.innerText = "Nochmal";
-            doBtn.style.background = "";
-            if (ms <= 600) {
-                status.innerHTML = `<span style="color:#4dff88; font-weight:bold;">⚡ Blitzschnell (${ms} ms)! +1 Flamme!</span>`;
+// --- 4. DONNERSTAG: EULEN-QUIZ (WAHR ODER FALSCH) ---
+const doFrageEl = document.getElementById('do-frage');
+if (doFrageEl) {
+    // Hier kannst du jederzeit eigene Fragen & Antworten ergänzen!
+    const fragen = [
+        { text: "Eulen können ihren Kopf um bis zu 270 Grad drehen.", antwort: true },
+        { text: "Die Augen einer Eule sind so groß, dass sie sie nicht bewegen kann.", antwort: true },
+        { text: "Schokolade besteht ursprünglich aus gerösteten Kaffeebohnen.", antwort: false },
+        { text: "Das Lied 'Happy Birthday' war der erste Song, der jemals auf dem Mars abgespielt wurde.", antwort: true },
+        { text: "Honig kann bei richtiger Lagerung nach 5 Jahren schlecht werden.", antwort: false },
+        { text: "Eine Gruppe von Eulen nennt man auf Englisch 'Parliament' (Parlament).", antwort: true },
+        { text: "Flamingos sind von Geburt an knallpink.", antwort: false }
+    ];
+
+    let richtigInFolge = 0;
+    let aktuelleFrage = null;
+
+    const wahrBtn = document.getElementById('do-wahr');
+    const falschBtn = document.getElementById('do-falsch');
+    const statusEl = document.getElementById('do-status');
+
+    function naechsteFrage() {
+        aktuelleFrage = fragen[Math.floor(Math.random() * fragen.length)];
+        doFrageEl.innerText = aktuelleFrage.text;
+    }
+
+    function pruefeAntwort(spielerAntwort) {
+        if (!aktuelleFrage) return;
+
+        if (spielerAntwort === aktuelleFrage.antwort) {
+            richtigInFolge++;
+            if (richtigInFolge >= 3) {
+                statusEl.innerHTML = `<span style="color:#4dff88; font-weight:bold;">🎉 3/3 richtig! +1 Flamme! 🔥</span>`;
                 registerDailyWin();
+                richtigInFolge = 0;
             } else {
-                status.innerText = `${ms} ms – versuch es unter 600 ms zu schaffen! 😉`;
+                statusEl.innerText = `Richtig! ✨ (${richtigInFolge} / 3 geschafft)`;
             }
+        } else {
+            richtigInFolge = 0;
+            statusEl.innerHTML = `<span style="color:#ff4d4d;">Leider falsch! ❌</span> Serie startet wieder bei 0.`;
         }
-    };
+        naechsteFrage();
+    }
+
+    if (wahrBtn) wahrBtn.onclick = () => pruefeAntwort(true);
+    if (falschBtn) falschBtn.onclick = () => pruefeAntwort(false);
+
+    naechsteFrage();
 }
+
 
 // --- 5. FREITAG: SCHERE, STEIN, PAPIER ---
 const wahlNamen = ["🪨 Stein", "📄 Papier", "✂️ Schere"];
