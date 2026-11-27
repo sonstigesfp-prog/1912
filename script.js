@@ -443,10 +443,10 @@ if (wordleBoard) {
     });
 }
 
-// --- 7. SONNTAG: HERZ-KLICKER ---
+// --- 7. SONNTAG: GUESS THE SONG ---
 const songPlayer = document.getElementById('song-player');
 if (songPlayer) {
-    // Hier deine MP3-Dateien, den angezeigten Titel und alle akzeptierten Lösungen (kleingeschrieben!) eintragen:
+    // Hier deine 12 MP3-Dateien & Lösungen eintragen (Kommas zwischen den Blöcken sind ergänzt!):
     const songs = [
         {
             datei: "song1.mp3",
@@ -462,7 +462,7 @@ if (songPlayer) {
             datei: "song3.mp3",
             anzeige: "Miley Cyrus - Flowers",
             akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
-        }
+        },
         {
             datei: "song4.mp3",
             anzeige: "Taylor Swift - Shake It Off",
@@ -477,8 +477,8 @@ if (songPlayer) {
             datei: "song6.mp3",
             anzeige: "Miley Cyrus - Flowers",
             akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
-        } 
-     {
+        },
+        {
             datei: "song7.mp3",
             anzeige: "Taylor Swift - Shake It Off",
             akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
@@ -492,8 +492,8 @@ if (songPlayer) {
             datei: "song9.mp3",
             anzeige: "Miley Cyrus - Flowers",
             akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
-        }
-     {
+        },
+        {
             datei: "song10.mp3",
             anzeige: "Taylor Swift - Shake It Off",
             akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
@@ -536,13 +536,12 @@ if (songPlayer) {
     };
 
     function pruefeEingabe() {
-        const tipp = inputEl.value.trim().toLowerCase(); // Wandelt alles in Kleinbuchstaben um
+        const tipp = inputEl.value.trim().toLowerCase();
         if (!tipp) return;
 
         songPlayer.pause();
         const s = songs[aktuellerIndex];
 
-        // Prüft, ob die Eingabe in deiner akzeptierten Liste steht
         if (s.akzeptiert.includes(tipp)) {
             punkte++;
             if (punkte >= 3) {
