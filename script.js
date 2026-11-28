@@ -450,58 +450,58 @@ if (songPlayer) {
     const songs = [
         {
             datei: "song1.mp3",
-            anzeige: "Taylor Swift - Shake It Off",
-            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+            anzeige: "aespa - Supernova",
+            akzeptiert: ["supernova", "aespa supernova", "aespa - supernove"]
         },
         {
             datei: "song2.mp3",
-            anzeige: "Queen - Bohemian Rhapsody",
-            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+            anzeige: "aespa - Supernova",
+            akzeptiert: ["supernova", "aespa supernova", "aespa - supernove"]
         },
         {
             datei: "song3.mp3",
-            anzeige: "Miley Cyrus - Flowers",
-            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+            anzeige: "Cravity - Awake",
+            akzeptiert: ["Awake", "Cravity awake", "cravity - awake"]
         },
         {
             datei: "song4.mp3",
-            anzeige: "Taylor Swift - Shake It Off",
-            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+            anzeige: "Monsta X - Rush Hour",
+            akzeptiert: ["Rush hour", "Monsta x rush hour", "Monstax rush hour"]
         },
         {
             datei: "song5.mp3",
-            anzeige: "Queen - Bohemian Rhapsody",
-            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+            anzeige: "Illit - Its  Me",
+            akzeptiert: ["Its Me", "Illit Its Me", "It's Me]
         },
         {
             datei: "song6.mp3",
-            anzeige: "Miley Cyrus - Flowers",
-            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+            anzeige: "Ive - Baddie",
+            akzeptiert: ["baddie", "Ive baddie", "Ive - baddie"]
         },
         {
             datei: "song7.mp3",
-            anzeige: "Taylor Swift - Shake It Off",
-            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+            anzeige: "Nexz - Saucin",
+            akzeptiert: ["Saucin", "Nexz saucin", "nexz saucin"]
         },
         {
             datei: "song8.mp3",
-            anzeige: "Queen - Bohemian Rhapsody",
-            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+            anzeige: "Niziu - Heartis",
+            akzeptiert: ["Heartis, "Niziu -Heartis", "niziu heartis "]
         },
         {
             datei: "song9.mp3",
-            anzeige: "Miley Cyrus - Flowers",
-            akzeptiert: ["flowers", "miley cyrus flowers", "miley cyrus - flowers"]
+            anzeige: "Baby Monsters - sheesh",
+            akzeptiert: ["Sheesh", "shesh", "Baby Monster sheesh"]
         },
         {
             datei: "song10.mp3",
-            anzeige: "Taylor Swift - Shake It Off",
-            akzeptiert: ["shake it off", "taylor swift shake it off", "taylor swift - shake it off"]
+            anzeige: "Twice - What is love?",
+            akzeptiert: ["What is love", "Twice - What is love", "What is love?"]
         },
         {
             datei: "song11.mp3",
-            anzeige: "Queen - Bohemian Rhapsody",
-            akzeptiert: ["bohemian rhapsody", "queen bohemian rhapsody", "queen - bohemian rhapsody"]
+            anzeige: "xdinary heros - supernatural",
+            akzeptiert: ["xdinary heros - supernatural", "xdinary heros supernatural", "supernatural"]
         },
         {
             datei: "song12.mp3",
